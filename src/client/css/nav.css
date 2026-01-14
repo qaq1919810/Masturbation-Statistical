@@ -1,0 +1,20 @@
+body{
+    padding-bottom: 10vw;
+}
+.bottom-nav{
+    position: fixed;
+    bottom: 0;
+
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+
+    height: 10vw;
+    width: 100%;
+
+    border-top: 1px solid;
+    background: white;
+}
+.bottom-nav .nav-item{
+    font-size: 5vw;
+}

@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>个人信息设置</title>
+    <link rel="stylesheet" href="./css/initData.css">
+    <link rel="stylesheet" href="./css/global.css">
+    <script>
+        // 初始化全局变量
+        let userInfo = {
+            age: 91,
+            sex: 'man'
+        }
+
+        // 自定义提示框逻辑
+        function showToast(text) {
+            const toast = document.querySelector("#toast")
+            toast.textContent = text
+            toast.classList.add("show")
+
+            setTimeout(function () {
+                toast.classList.remove("show")
+            }, 1500)
+        }
+
+        function initSettings() {
+            const ageRange = document.querySelector("#ageRange")
+            const ageInput = document.querySelector("#ageInput")
+            const genderBtns = document.querySelectorAll(".gender-btn")
+            const confirmBtn = document.querySelector("#confirmBtn")
+
+            // 核心更新函数：实现双向绑定
+            function updateAge(val) {
+                let num = parseInt(val)
+
+                // 处理非数字输入
+                if (isNaN(num)) return
+
+                // 记录数据
+                userInfo.age = num
+
+                // 同步滑块位置（自动受限在 -10 到 110）
+                ageRange.value = num
+                // 同步输入框内容
+                ageInput.value = num
+            }
+
+            if (ageRange && ageInput) {
+                // 1. 滑块逻辑
+                ageRange.addEventListener("input", function (e) {
+                    updateAge(e.target.value)
+                })
+
+                // 2. 输入框逻辑
+                ageInput.addEventListener("input", function (e) {
+                    // 仅允许数字和负号
+                    let val = e.target.value.replace(/[^\d-]/g, "")
+                    updateAge(val)
+                })
+
+                // 3. 增强体验：点击自动全选数字
+                ageInput.addEventListener("click", function () {
+                    this.select()
+                })
+            }
+
+            // 性别选择逻辑
+            genderBtns.forEach(function (btn) {
+                btn.addEventListener("click", function () {
+                    genderBtns.forEach(function (b) { b.classList.remove("active") })
+                    this.classList.add("active")
+
+                    const text = this.textContent.trim()
+                    userInfo.sex = text === '男' ? 'man' : 'woman'
+                })
+            })
+
+            // 确定按钮逻辑
+            function handleConfirm() {
+                const age = userInfo.age
+                const hasActiveGender = document.querySelector(".gender-btn.active")
+
+                if (!hasActiveGender || isNaN(age) || age < 1 || age > 100) {
+                    showToast("你真的是人类吗")
+                    return
+                }
+
+                if (age >= 1 && age <= 14) {
+                    showToast("小小年纪，注意节制哟")
+                } else if (age >= 80 && age <= 100) {
+                    showToast("老当益壮呀")
+                } else {
+                    showToast("设定成功")
+                }
+
+                const accountData = {
+                    ...userInfo,
+                    statistics: []
+                }
+
+                localStorage.setItem("AccountData", JSON.stringify(accountData))
+
+                confirmBtn.removeEventListener("click", handleConfirm)
+                confirmBtn.classList.add("disabled")
+                confirmBtn.textContent = "已就绪"
+
+                setTimeout(function () {
+                    window.location.href = "./html/home.html"
+                }, 2000)
+            }
+
+            confirmBtn.addEventListener("click", handleConfirm)
+        }
+
+        document.addEventListener("DOMContentLoaded", function () {
+            initSettings()
+        })
+    </script>
+</head>
+<body>
+<div class="settings-container">
+    <h2>设置</h2>
+
+    <div class="section-title">个人信息</div>
+
+    <div class="card">
+        <div class="info-item">
+            <span class="icon">👤</span>
+            <div class="age-input-container">
+                年龄：<input type="number" id="ageInput" value="91"> 岁
+            </div>
+        </div>
+        <input type="range" id="ageRange" min="-10" max="110" value="91" class="slider">
+        <span class="age-tip">Tip:点击数字可以直接修改哟</span>
+    </div>
+
+    <div class="card">
+        <div class="info-item">
+            <span class="icon">🚻</span>
+            <span>性别</span>
+        </div>
+        <div class="gender-group">
+            <button class="gender-btn active">男</button>
+            <button class="gender-btn">女</button>
+        </div>
+    </div>
+
+    <button id="confirmBtn" class="confirm-btn">确定</button>
+</div>
+
+<div id="toast" class="toast-msg"></div>
+</body>
+</html>
