@@ -86,11 +86,23 @@ function weekEchartSync() {
     }
 
     myChart.setOption(option)
-
-    // 解决渲染偏移：强制重绘
+    // 解决渲染偏移：延迟重绘并监听容器变化
     setTimeout(() => {
-        myChart.resize()
-    }, 100)
+        try { myChart.resize() } catch (e) { /* ignore */ }
+    }, 80)
+
+    // 在容器尺寸变化或显示状态改变时自动调整图表
+    if (typeof ResizeObserver !== 'undefined' && !chartDom.__echartsResizeBound) {
+        try {
+            const ro = new ResizeObserver(() => {
+                try { myChart.resize() } catch (e) { /* ignore */ }
+            })
+            ro.observe(chartDom)
+            chartDom.__echartsResizeBound = true
+        } catch (e) {
+            // ignore if ResizeObserver not available or observe fails
+        }
+    }
 }
 
 function monthSheetSync() {
@@ -275,6 +287,12 @@ export function initStatsTabs() {
                 panel.classList.add("hidden")
             }
         })
+        // 切换后触发对应视图的同步（延迟以等待样式应用）
+        setTimeout(() => {
+            if (targetViewId === 'view-week') weekEchartSync()
+            else if (targetViewId === 'view-month') monthSheetSync()
+            else if (targetViewId === 'view-all') allViewSync()
+        }, 100)
     })
 }
 
