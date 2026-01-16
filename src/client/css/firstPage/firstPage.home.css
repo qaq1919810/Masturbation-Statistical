@@ -1,0 +1,92 @@
+/* 第一页特定内容渲染容器 */
+.home-container {
+    width: 100%;
+    min-height: 100%;
+    padding: 6vw;
+    display: flex;
+    flex-direction: column;
+    gap: 5vw;
+
+    /* 健康贴士卡片 */
+    .tips-card {
+        background: #edf8ee;
+        padding: 5vw;
+        border-radius: 6vw;
+        color: #558b2f;
+    }
+
+    .tips-title {
+        margin-bottom: 2vw;
+        font-weight: bold;
+    }
+
+    .greeting-section {
+        margin-top: 4vw;
+        .date-text {
+            color: #888;
+            font-size: 3.8vw;
+        }
+        .welcome-title {
+            font-weight: bold;
+            font-size: 7.5vw;
+            color: #333;
+        }
+    }
+
+    .today-card {
+        background: white;
+        border-radius: 6vw;
+        padding: 8vw;
+        display: flex;
+        align-items: center;
+        gap: 4vw;
+        box-shadow: 0 2vw 5vw rgba(0,0,0,0.03);
+
+        .status-icon {
+            background: #f0f7ff;
+            width: 15vw;
+            height: 15vw;
+            border-radius: 4vw;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 7vw;
+        }
+    }
+
+    .stats-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 4vw;
+
+        .stat-box {
+            background: white;
+            padding: 5vw;
+            border-radius: 6vw;
+            .stat-label {
+                color: #888;
+                font-size: 3.2vw;
+            }
+            .stat-value {
+                font-weight: bold;
+                font-size: 5.5vw;
+            }
+        }
+    }
+
+    .action-btn {
+        align-self: center;
+        background: #90caf9; /* 这里可以直接写颜色或通过 var */
+        border: none;
+        padding: 4vw 12vw;
+        border-radius: 10vw;
+        color: white;
+        font-weight: bold;
+        box-shadow: 0 3vw 6vw rgba(144, 202, 249, 0.4);
+
+        &:active {
+            transform: scale(0.95);
+            opacity: 0.9;
+        }
+    }
+}

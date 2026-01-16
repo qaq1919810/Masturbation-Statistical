@@ -1,0 +1,66 @@
+/* 基础变量定义 */
+:root {
+    --nav-height: 10vw; /* 改为响应式单位 */
+    --primary-blue: #90caf9;
+}
+
+/* 核心滑动框架 */
+.slider-viewport {
+    width: 100vw;
+    height: calc(100vh - var(--nav-height));
+    overflow: hidden;
+    position: relative;
+    background-color: #f8f9fa;
+
+    /* 滑动轨道 */
+    .slider-track {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        width: 100%;
+        height: 100%;
+        overflow-x: auto;
+        overflow-y: hidden;
+        scroll-snap-type: x mandatory;
+        /* 注意：由于我们要实现点击瞬移，JS会动态修改此值，此处保持 auto */
+        scroll-behavior: auto;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+
+        &::-webkit-scrollbar {
+            display: none;
+        }
+
+        /* 页面包装器基础定义 */
+        .page-wrapper {
+            flex: 0 0 100vw;
+            width: 100vw;
+            height: 100%;
+            scroll-snap-align: start;
+            overflow-y: auto;
+            box-sizing: border-box;
+        }
+    }
+}
+
+/* 健康状态：保持你原有的 home-container 样式 */
+.home-container .tips-card {
+    background: #edf8ee;
+    padding: 5vw;
+    border-radius: 6vw;
+    color: #558b2f;
+}
+
+/* 频繁状态：定义红色警告样式 */
+.home-container .advice-card {
+    background: #fff1f0; /* 浅红背景 */
+    padding: 5vw;
+    border-radius: 6vw;
+    color: #cf1322;      /* 深红文字 */
+}
+
+/* 统一样式：让内部标题在两种状态下都加粗 */
+.tips-title {
+    margin-bottom: 2vw;
+    font-weight: bold;
+}

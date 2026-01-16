@@ -1,0 +1,158 @@
+.stats-container {
+    width: 100%;
+    min-height: 100%;
+    /* 移除整体背景色，使其透明或透出底层颜色 */
+    display: flex;
+    flex-direction: column;
+
+    /* 仅顶栏切换栏保留背景色 */
+    .stats-tabs {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+
+        height: 10vw;
+        width: 100%;
+        border-bottom: 1px solid #eee;
+        background: white; /* 顶栏保留白色背景 */
+
+        .tab-item {
+            font-size: 5vw;
+            color: #888;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            flex: 1;
+
+            &.active {
+                color: #90caf9;
+                font-weight: bold;
+
+                &::after {
+                    content: '';
+                    position: absolute;
+                    bottom: 0;
+                    width: 60%;
+                    height: 2px;
+                    background: #90caf9;
+                }
+            }
+        }
+    }
+
+    /* 内容区域 */
+    .stats-content {
+        padding: 6vw;
+        flex: 1;
+
+        .view-panel {
+            display: flex;
+            flex-direction: column;
+            gap: 5vw;
+            &.hidden { display: none; }
+        }
+
+        /* 本周视图 */
+        .chart-header {
+            text-align: center;
+            margin: 4vw 0;
+            .big-number { font-size: 15vw; color: #90caf9; font-weight: bold; }
+            .sub-label { color: #888; font-size: 4vw; }
+        }
+
+        .bar-chart {
+            height: 40vh;
+            width: 100%;
+        }
+
+        /* 全部视图卡片保持白色，以在透明背景上突出 */
+        .info-card {
+            background: #fff;
+            border: 1px solid #f5f5f5;
+            border-radius: 6vw;
+            padding: 6vw;
+            display: flex;
+            flex-direction: column;
+            gap: 2vw;
+            box-shadow: 0 2vw 4vw rgba(0,0,0,0.02);
+
+            .card-label { color: #666; font-size: 4vw; }
+            .card-value {
+                font-size: 8vw; font-weight: bold;
+                &.blue { color: #90caf9; }
+                span { font-size: 4vw; color: #888; font-weight: normal; }
+            }
+        }
+
+        .advice-card {
+            background: #f3e5f5;
+            border-radius: 6vw;
+            padding: 5vw;
+            color: #7b1fa2;
+            .advice-text { font-size: 3.5vw; margin-top: 1vw; }
+        }
+
+        /* 本月视图 */
+        .calendar-card {
+            background: #fff;
+            border: 1px solid #f5f5f5;
+            border-radius: 6vw;
+            padding: 5vw;
+
+            .cal-header {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                font-size: 4vw;
+                margin-bottom: 4vw;
+                font-weight: bold;
+                color: #333;
+
+                span {
+                    color: #999;
+                    font-weight: normal;
+                }
+            }
+
+            .calendar-grid {
+                display: grid;
+                grid-template-columns: repeat(7, 1fr);
+                gap: 3vw;
+
+                .cal-day {
+                    aspect-ratio: 1;
+                    background: #f9f9f9;
+                    border-radius: 50%;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    transition: all 0.2s ease;
+
+                    /* 记录较多时的爱心样式 */
+                    &.active-heart {
+                        background: #ef9a9a;
+                        color: white;
+                        font-size: 3.5vw; /* 稍微调大一点点确保图标居中 */
+                    }
+
+                    /* 记录一次时的点样式 */
+                    &.dot {
+                        /* 注意：点样式通常不需要深色背景，如果你需要图片中那种淡蓝色背景可以加上 */
+                        background: #f0f7ff;
+                        color: #90caf9;
+                        font-weight: bold;
+                        font-size: 5vw;
+                        line-height: 0; /* 修正点的垂直偏移 */
+                    }
+
+                    /* 如果是空白格子（虽然你逻辑里没写占位符，但预留样式以防万一） */
+                    &.empty {
+                        background: transparent;
+                    }
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <link rel="stylesheet" href="../css/nav.css">
+    <link rel="stylesheet" href="../css/global.css">
+    <link rel="stylesheet" href="../css/firstPage.css">
+    <link rel="stylesheet" href="../css/firstPage/firstPage.home.css">
+    <link rel="stylesheet" href="../css/firstPage/firstPage.stats.css">
+    <script src="../js/firstPage.js" type="module"></script>
+    <script src="../js/global.js"></script>
+    <script src="../js/lib/echarts.js"></script>
+</head>
+<body>
+<main class="slider-viewport">
+<!--    主页-->
+    <div class="slider-track" id="slider-track">
+        <section class="page-wrapper" id="homePage" data-page="home">
+            <div class="home-container">
+                <header class="greeting-section">
+                    <p class="date-text" id="nowTimeShow">nowTime</p>
+                    <h1 class="welcome-title" id="nowTimeStateShow">now好！机长 ☀️</h1>
+                </header>
+
+                <section class="today-card">
+                    <div class="status-icon">⭐</div>
+                    <div class="status-info">
+                        <h2>今日还没起飞</h2>
+                        <p>别忘了爱自己哦</p>
+                    </div>
+                </section>
+
+                <section class="stats-section">
+                    <h3 class="section-title">本周概览</h3>
+                    <div class="stats-grid">
+                        <div class="stat-box">
+                            <span class="stat-label">⭐ 次数</span>
+                            <p class="stat-value">0 <span>次</span></p>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">💗 状态</span>
+                            <p class="stat-value">活跃</p>
+                        </div>
+                    </div>
+                </section>
+
+                <footer class="tips-card" id="advice-container-home"></footer>
+
+                <button class="action-btn" id="action-btn">
+                    <span>🛫</span> 起飞
+                </button>
+            </div>
+        </section>
+<!--        统计-->
+        <section class="page-wrapper" id="statsPage">
+            <div class="stats-container">
+                <header class="stats-tabs">
+                    <div class="tab-item active" data-view="week">本周</div>
+                    <div class="tab-item" data-view="month">本月</div>
+                    <div class="tab-item" data-view="all">全部</div>
+                </header>
+
+                <div class="stats-content">
+                    <div class="view-panel" id="view-week">
+                        <div class="chart-header">
+                            <span class="big-number" id="big-number"></span>
+                            <p class="sub-label">本周记录</p>
+                        </div>
+<!--                        图表-->
+                        <div class="bar-chart" id="bar-chart"></div>
+                    </div>
+
+                    <div class="view-panel hidden" id="view-month">
+                        <div class="calendar-card">
+                            <div class="cal-header">
+                                📅 本月发射足迹
+                                <span>-月</span>
+                            </div>
+                            <div class="calendar-grid"></div>
+                        </div>
+                    </div>
+
+                    <div class="view-panel hidden" id="view-all">
+                        <div class="info-card">
+                            <span class="card-label">累计记录</span>
+                            <span class="card-value blue">0 <span>次</span></span>
+                        </div>
+                        <div class="info-card">
+                            <span class="card-label">最长连续</span>
+                            <span class="card-value blue">0 <span>天</span></span>
+                        </div>
+                        <div class="info-card">
+                            <span class="card-label">平均频率</span>
+                            <span class="card-value blue">0.0 <span>次/周</span></span>
+                        </div>
+
+                        <div class="home-container" style="padding: 0; margin-top: 5vw; min-height: auto;">
+                            <footer id="advice-container" class="tips-card"></footer>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </div>
+</main>
+
+<nav class="bottom-nav">
+    <a class="nav-item" data-target="home">主页</a>
+    <a class="nav-item" data-target="stats">统计</a>
+    <a class="nav-item" data-target="settings">设置</a>
+</nav>
+</body>
+</html>

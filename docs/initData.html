@@ -96,7 +96,7 @@
 
                 const accountData = {
                     ...userInfo,
-                    statistics: []
+                    stats: []
                 }
 
                 localStorage.setItem("AccountData", JSON.stringify(accountData))
@@ -106,7 +106,7 @@
                 confirmBtn.textContent = "已就绪"
 
                 setTimeout(function () {
-                    window.location.href = "./html/home.html"
+                    window.location.href = "./html/firstPage.html"
                 }, 2000)
             }
 
