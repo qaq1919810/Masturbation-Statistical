@@ -141,14 +141,8 @@ function monthSheetSync() {
         // 填充内容
         const count = dayMap.get(d) || 0
         if (count > 0) {
-            // 根据次数决定图标：多次为爱心，一次为点
-            if (count > 1) {
-                cell.classList.add("active-heart")
-                cell.textContent = "❤️"
-            } else {
-                cell.classList.add("dot")
-                cell.textContent = "."
-            }
+            cell.classList.add("active-heart")
+            cell.textContent = "❤️"
         }
 
         grid.appendChild(cell)
